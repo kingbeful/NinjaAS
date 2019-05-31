@@ -29,3 +29,6 @@ proguard_logs/
 
 # Others
 *.directory
+
+# idea
+.idea/
