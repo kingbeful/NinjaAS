@@ -1,24 +1,45 @@
 package io.github.mthli.Ninja.Unit;
 
 import android.app.DownloadManager;
-import android.content.*;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.webkit.*;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.URLUtil;
+import android.webkit.ValueCallback;
+import android.webkit.WebIconDatabase;
+import android.webkit.WebViewDatabase;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
+
 import io.github.mthli.Ninja.Browser.AdBlock;
 import io.github.mthli.Ninja.Database.Record;
 import io.github.mthli.Ninja.Database.RecordAction;
 import io.github.mthli.Ninja.R;
 import io.github.mthli.Ninja.View.NinjaToast;
-
-import java.io.*;
-import java.net.URLEncoder;
-import java.util.*;
-import java.util.regex.Pattern;
 
 public class BrowserUnit {
     public static final int PROGRESS_MAX = 100;
@@ -60,6 +81,7 @@ public class BrowserUnit {
     public static final String URL_SCHEME_HTTP = "http://";
     public static final String URL_SCHEME_HTTPS = "https://";
     public static final String URL_SCHEME_INTENT = "intent://";
+    public static final String URL_SCHEME_JAVASCRIPT = "javascript:";
 
     public static final String URL_PREFIX_GOOGLE_PLAY = "www.google.com/url?q=";
     public static final String URL_SUFFIX_GOOGLE_PLAY = "&sa";
@@ -114,6 +136,10 @@ public class BrowserUnit {
                 query = URL_SCHEME_HTTP + query;
             }
 
+            return query;
+        }
+
+        if (query.startsWith(URL_SCHEME_JAVASCRIPT)) {
             return query;
         }
 
