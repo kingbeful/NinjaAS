@@ -2,7 +2,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="io.github.mthli.Ninja"
-          android:versionCode="26"
+          android:versionCode="27"
           android:versionName="@string/app_version">
 
     <!-- SDK -->
@@ -18,7 +18,7 @@
 
     <!-- Application -->
     <application android:label="@string/app_name"
-                 android:icon="@drawable/ic_launcher"
+                 android:icon="@drawable/iconspeed"
                  android:allowBackup="true"
                  android:enabled="true"
                  android:largeHeap="true">

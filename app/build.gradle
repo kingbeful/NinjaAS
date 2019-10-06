@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId "com.altm.app.topspeed"
+        applicationId "com.altm.app.ts"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
     }
 
     buildTypes {
@@ -15,6 +15,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 }
 
