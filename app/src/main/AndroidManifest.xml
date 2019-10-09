@@ -21,6 +21,9 @@
                  android:allowBackup="true"
                  android:enabled="true"
                  android:largeHeap="true">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4693448877034157~3376700127"/>
 
         <!-- HolderActivity -->
         <activity android:name=".Activity.HolderActivity"

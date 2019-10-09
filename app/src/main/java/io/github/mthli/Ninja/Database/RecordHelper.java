@@ -3,7 +3,7 @@ package io.github.mthli.Ninja.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import io.github.mthli.Ninja.Unit.RecordUnit;
 
 public class RecordHelper extends SQLiteOpenHelper {

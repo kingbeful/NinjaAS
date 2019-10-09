@@ -51,6 +51,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import org.askerov.dynamicgrid.DynamicGridView;
 
 import java.util.ArrayList;
@@ -147,6 +152,7 @@ public class BrowserActivity extends Activity implements BrowserController {
     private int longAnimTime = 0;
     private AlbumController currentAlbumController = null;
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -165,6 +171,11 @@ public class BrowserActivity extends Activity implements BrowserController {
             );
             setTaskDescription(description);
         }
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+        });
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         anchor = Integer.valueOf(sp.getString(getString(R.string.sp_anchor), "0"));

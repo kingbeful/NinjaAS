@@ -11,18 +11,25 @@ import android.net.MailTo;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
-import android.webkit.*;
+import android.webkit.HttpAuthHandler;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+
+import java.io.ByteArrayInputStream;
+
 import io.github.mthli.Ninja.R;
 import io.github.mthli.Ninja.Unit.BrowserUnit;
 import io.github.mthli.Ninja.Unit.IntentUnit;
 import io.github.mthli.Ninja.View.NinjaWebView;
-
-import java.io.ByteArrayInputStream;
 
 public class NinjaWebViewClient extends WebViewClient {
     private NinjaWebView ninjaWebView;
