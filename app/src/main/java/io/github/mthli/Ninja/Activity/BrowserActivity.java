@@ -51,10 +51,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import org.askerov.dynamicgrid.DynamicGridView;
 
@@ -166,16 +163,13 @@ public class BrowserActivity extends Activity implements BrowserController {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ActivityManager.TaskDescription description = new ActivityManager.TaskDescription(
                     getString(R.string.app_name),
-                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher),
+                    BitmapFactory.decodeResource(getResources(), R.drawable.iconspeed),
                     getResources().getColor(R.color.background_dark)
             );
             setTaskDescription(description);
         }
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {}
-        });
+        MobileAds.initialize(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         anchor = Integer.valueOf(sp.getString(getString(R.string.sp_anchor), "0"));

@@ -17,6 +17,7 @@
 
     <!-- Application -->
     <application android:label="@string/app_name"
+                 android:name="com.altm.app.ts.MyApplication"
                  android:icon="@drawable/iconspeed"
                  android:allowBackup="true"
                  android:enabled="true"

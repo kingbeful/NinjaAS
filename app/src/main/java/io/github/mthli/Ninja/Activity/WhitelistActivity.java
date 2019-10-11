@@ -3,6 +3,7 @@ package io.github.mthli.Ninja.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
+
+import java.util.List;
+
 import io.github.mthli.Ninja.Browser.AdBlock;
 import io.github.mthli.Ninja.Database.RecordAction;
 import io.github.mthli.Ninja.R;
@@ -17,17 +26,60 @@ import io.github.mthli.Ninja.Unit.BrowserUnit;
 import io.github.mthli.Ninja.View.NinjaToast;
 import io.github.mthli.Ninja.View.WhitelistAdapter;
 
-import java.util.List;
-
 public class WhitelistActivity extends Activity {
     private WhitelistAdapter adapter;
     private List<String> list;
+    private InterstitialAd interstitialAd;
+    private final static String TAG = WhitelistActivity.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whitelist);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        interstitialAd = new InterstitialAd(this, "YOUR_PLACEMENT_ID");
+        // Set listeners for the Interstitial Ad
+        interstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+                // Interstitial ad displayed callback
+                Log.e(TAG, "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                // Interstitial dismissed callback
+                Log.e(TAG, "Interstitial ad dismissed.");
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d(TAG, "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d(TAG, "Interstitial ad impression logged!");
+            }
+        });
+
+        interstitialAd.loadAd();
 
         RecordAction action = new RecordAction(this);
         action.open(false);
@@ -75,6 +127,14 @@ public class WhitelistActivity extends Activity {
     public void onPause() {
         hideSoftInput(findViewById(R.id.whilelist_edit));
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        super.onDestroy();
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import java.io.File;
 
+import io.github.mthli.Ninja.BuildConfig;
 import io.github.mthli.Ninja.Fragment.SettingFragment;
 import io.github.mthli.Ninja.R;
 import io.github.mthli.Ninja.Task.ImportBookmarksTask;
@@ -30,7 +31,12 @@ public class SettingActivity extends Activity {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-4693448877034157/7180213761");
+        if (BuildConfig.DEBUG) {
+            mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        } else {
+            mInterstitialAd.setAdUnitId("ca-app-pub-4693448877034157/7180213761");
+        }
+
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
