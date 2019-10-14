@@ -36,3 +36,5 @@ proguard_logs/
 app/release/output.json
 
 *.iml
+
+*.aab
