@@ -14,12 +14,14 @@ import android.widget.ListView;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 
 import java.util.List;
 
 import io.github.mthli.Ninja.Browser.AdBlock;
+import io.github.mthli.Ninja.BuildConfig;
 import io.github.mthli.Ninja.Database.RecordAction;
 import io.github.mthli.Ninja.R;
 import io.github.mthli.Ninja.Unit.BrowserUnit;
@@ -37,7 +39,10 @@ public class WhitelistActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whitelist);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        interstitialAd = new InterstitialAd(this, "YOUR_PLACEMENT_ID");
+        interstitialAd = new InterstitialAd(this, "447568642531681_447570512531494");
+        if (BuildConfig.DEBUG) {
+            AdSettings.addTestDevice("1f029cd7-38f0-4f66-b5c0-678bfacb96de");
+        }
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
             @Override
