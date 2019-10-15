@@ -160,7 +160,7 @@
 
         <Preference android:title="@string/setting_title_license" />
 
-        <Preference android:title="@string/setting_title_donation" />
+<!--        <Preference android:title="@string/setting_title_donation" />-->
 
     </PreferenceCategory>
 
